@@ -1,0 +1,1473 @@
+/* === Professional Fintech Dashboard === */
+
+:root {
+    /* Colors - Light Mode */
+    --color-bg: #f7f8fa;
+    --color-surface: #ffffff;
+    --color-border: #e5e7eb;
+    --color-border-light: #f0f1f3;
+
+    --color-primary: #1e293b;
+    --color-primary-hover: #0f172a;
+
+    --color-success: #059669;
+    --color-success-bg: #ecfdf5;
+
+    --color-danger: #dc2626;
+    --color-danger-bg: #fef2f2;
+
+    --color-text: #1e293b;
+    --color-text-muted: #6b7280;
+    --color-text-light: #9ca3af;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.06);
+
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+
+    /* Border Radius */
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+
+    /* Transitions */
+    --transition: 150ms ease;
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+    /* Colors - Dark Mode */
+    --color-bg: #0f172a;
+    --color-surface: #1e293b;
+    --color-border: #334155;
+    --color-border-light: #475569;
+
+    --color-primary: #e2e8f0;
+    --color-primary-hover: #f1f5f9;
+
+    --color-success: #10b981;
+    --color-success-bg: rgba(16, 185, 129, 0.1);
+
+    --color-danger: #ef4444;
+    --color-danger-bg: rgba(239, 68, 68, 0.1);
+
+    --color-text: #f1f5f9;
+    --color-text-muted: #94a3b8;
+    --color-text-light: #64748b;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* App Container */
+.app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+}
+
+/* === Header === */
+.app-header {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--spacing-lg) 0;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.app-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--color-primary);
+    letter-spacing: -0.3px;
+}
+
+.app-subtitle {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    margin-top: 2px;
+}
+
+/* === Stats Bar === */
+.stats-bar {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--spacing-md) 0;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--spacing-lg);
+}
+
+.stats-grid-main {
+    margin-bottom: var(--spacing-md);
+}
+
+/* === Card Limit === */
+.card-limit-section {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-sm) 0;
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--spacing-md);
+}
+
+.card-limit-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 140px;
+}
+
+.card-limit-label {
+    font-size: 11px;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.card-limit-amount {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+.card-limit-amount span:first-child {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+.card-limit-divider {
+    color: var(--color-text-light);
+}
+
+.card-limit-total {
+    font-size: 14px;
+    color: var(--color-text-muted);
+}
+
+.card-limit-remaining {
+    font-size: 12px;
+    color: var(--color-success);
+    margin-left: 8px;
+}
+
+.card-limit-bar {
+    flex: 1;
+    height: 6px;
+    background: var(--color-border-light);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.card-limit-progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-success), #f59e0b);
+    border-radius: 3px;
+    transition: width 300ms ease;
+}
+
+.card-limit-percent {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    min-width: 50px;
+    text-align: right;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.stat-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-primary);
+    letter-spacing: -0.5px;
+}
+
+.stat-positive .stat-value {
+    color: var(--color-success);
+}
+
+.stat-negative .stat-value {
+    color: var(--color-danger);
+}
+
+/* === Main Content === */
+.app-main {
+    flex: 1;
+    padding: var(--spacing-xl) 0;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: var(--spacing-lg);
+}
+
+/* === Section Header === */
+.section-header {
+    margin-bottom: var(--spacing-md);
+}
+
+.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+/* === Form Tabs === */
+.form-tabs {
+    display: flex;
+    gap: 2px;
+    margin-bottom: var(--spacing-md);
+    background: var(--color-bg);
+    border-radius: var(--radius-md);
+    padding: 3px;
+}
+
+.form-tab {
+    flex: 1;
+    padding: 8px 12px;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.form-tab:hover {
+    color: var(--color-text);
+}
+
+.form-tab.active {
+    background: var(--color-surface);
+    color: var(--color-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+/* === List Tabs === */
+.list-tabs {
+    display: flex;
+    gap: 2px;
+    margin-bottom: var(--spacing-md);
+}
+
+.list-tab {
+    padding: 8px 16px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.list-tab:hover {
+    color: var(--color-text);
+}
+
+.list-tab.active {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+}
+
+.list-content {
+    display: none;
+}
+
+.list-content.active {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+/* === Info Box === */
+.form-info-box {
+    display: flex;
+    gap: var(--spacing-sm);
+    padding: 10px 12px;
+    background: rgba(99, 102, 241, 0.08);
+    border-radius: var(--radius-md);
+    font-size: 12px;
+    color: var(--color-text-muted);
+}
+
+[data-theme="dark"] .form-info-box {
+    background: rgba(99, 102, 241, 0.15);
+}
+
+.info-icon {
+    font-size: 14px;
+}
+
+/* === Form Section === */
+.form-section {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+}
+
+.loan-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    min-width: 0;
+}
+
+.field-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text);
+}
+
+.field-input {
+    padding: 10px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--color-text);
+    background: var(--color-surface);
+    transition: border-color var(--transition);
+    width: 100%;
+    min-width: 0;
+}
+
+.field-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+[data-theme="dark"] .field-input:focus {
+    border-color: #94a3b8;
+}
+
+.field-input::placeholder {
+    color: var(--color-text-light);
+}
+
+.field-textarea {
+    resize: vertical;
+    min-height: 70px;
+}
+
+select.field-input {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 30px;
+}
+
+[data-theme="dark"] select.field-input {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+}
+
+/* === Buttons === */
+.btn-primary {
+    padding: 12px 20px;
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background var(--transition);
+}
+
+.btn-primary:hover {
+    background: var(--color-primary-hover);
+}
+
+[data-theme="dark"] .btn-primary {
+    background: #0f172a;
+    color: #f1f5f9;
+}
+
+[data-theme="dark"] .btn-primary:hover {
+    background: #020617;
+}
+
+.btn-secondary {
+    padding: 8px 14px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.btn-secondary:hover {
+    background: var(--color-bg);
+    border-color: var(--color-text-muted);
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+    background: #334155;
+    border-color: #64748b;
+}
+
+.btn-text {
+    padding: 8px 12px;
+    background: transparent;
+    color: var(--color-text-muted);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: color var(--transition);
+}
+
+.btn-text:hover {
+    color: var(--color-danger);
+}
+
+.btn-sm {
+    font-size: 12px;
+    padding: 6px 12px;
+}
+
+/* === List Section === */
+.list-section {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+}
+
+.loan-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+/* === Loan Card === */
+.loan-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    transition: box-shadow var(--transition);
+}
+
+.loan-card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.loan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-md);
+}
+
+.loan-info {
+    flex: 1;
+}
+
+.loan-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 2px;
+}
+
+.loan-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 2px;
+}
+
+.loan-meta {
+    font-size: 13px;
+    color: var(--color-text-muted);
+}
+
+.loan-amount {
+    text-align: right;
+}
+
+.amount-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-primary);
+    letter-spacing: -0.3px;
+}
+
+/* === Progress === */
+.loan-progress {
+    margin-bottom: var(--spacing-md);
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.progress-label {
+    font-size: 12px;
+    color: var(--color-text-muted);
+}
+
+.progress-percent {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+.progress-track {
+    height: 4px;
+    background: var(--color-border-light);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--color-primary);
+    border-radius: 2px;
+    transition: width 300ms ease;
+}
+
+[data-theme="dark"] .progress-fill {
+    background: #3b82f6;
+}
+
+[data-theme="dark"] .modal-body .progress-fill {
+    background: #3b82f6;
+}
+
+/* === Loan Actions === */
+.loan-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+/* === Empty State === */
+.empty-state {
+    padding: var(--spacing-xl) var(--spacing-lg);
+    text-align: center;
+}
+
+.empty-text {
+    font-size: 14px;
+    color: var(--color-text-muted);
+}
+
+/* === Form Tabs === */
+.form-tabs {
+    display: flex;
+    gap: 2px;
+    margin-bottom: var(--spacing-md);
+    background: var(--color-bg);
+    border-radius: var(--radius-md);
+    padding: 3px;
+}
+
+.form-tab {
+    flex: 1;
+    padding: 8px 12px;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all var(--transition);
+    font-family: inherit;
+}
+
+.form-tab:hover {
+    color: var(--color-text);
+}
+
+.form-tab.active {
+    background: var(--color-surface);
+    color: var(--color-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+/* === List Tabs === */
+.list-tabs {
+    display: flex;
+    gap: 2px;
+    margin-bottom: var(--spacing-md);
+}
+
+.list-tab {
+    padding: 8px 16px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all var(--transition);
+    font-family: inherit;
+}
+
+.list-tab:hover {
+    color: var(--color-text);
+}
+
+.list-tab.active {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+}
+
+.list-content {
+    display: none;
+}
+
+.list-content.active {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+/* === Info Box === */
+.form-info-box {
+    display: flex;
+    gap: var(--spacing-sm);
+    padding: 10px 12px;
+    background: rgba(99, 102, 241, 0.08);
+    border-radius: var(--radius-md);
+    font-size: 12px;
+    color: var(--color-text-muted);
+}
+
+.info-icon {
+    font-size: 14px;
+}
+
+/* === Short Term Debt Card === */
+.debt-card {
+    display: flex;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    transition: all var(--transition);
+}
+
+.debt-card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.debt-card.paid {
+    background: var(--color-success-bg);
+    border-color: var(--color-success);
+}
+
+.debt-card.paid .debt-category {
+    text-decoration: line-through;
+    color: var(--color-text-muted);
+}
+
+.debt-card.overdue {
+    background: var(--color-danger-bg);
+    border-color: var(--color-danger);
+}
+
+.debt-check {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition);
+    font-size: 14px;
+    color: white;
+}
+
+.debt-card.paid .debt-check {
+    background: var(--color-success);
+    border-color: var(--color-success);
+}
+
+.debt-info {
+    flex: 1;
+}
+
+.debt-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.debt-category {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-primary);
+}
+
+.debt-amount {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+.debt-description {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    margin-bottom: 8px;
+}
+
+.debt-dates {
+    display: flex;
+    gap: var(--spacing-md);
+    font-size: 12px;
+}
+
+.debt-date {
+    color: var(--color-text-muted);
+}
+
+.debt-due {
+    color: var(--color-text-muted);
+}
+
+.debt-due.overdue {
+    color: var(--color-danger);
+    font-weight: 500;
+}
+
+.debt-bank {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    margin-bottom: 8px;
+}
+
+/* === Stat Warning === */
+.stat-warning .stat-value {
+    color: #f59e0b;
+}
+
+/* === Modal === */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+}
+
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-lg);
+}
+
+/* Modal açılanda body scroll bloklanır */
+body.modal-open {
+    overflow: hidden;
+}
+
+/* Modal açılanda arxa fon blur olsun */
+body.modal-open .app {
+    filter: blur(4px);
+    transition: filter 0.2s ease;
+}
+
+.app {
+    transition: filter 0.2s ease;
+}
+
+.modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 0;
+    cursor: pointer;
+}
+
+[data-theme="dark"] .modal-overlay {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.modal-dialog {
+    position: relative;
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    max-width: 600px;
+    width: 100%;
+    max-height: 85vh;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    z-index: 1;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.modal-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+.modal-close {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 20px;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.modal-close:hover {
+    background: var(--color-bg);
+    color: var(--color-text);
+}
+
+.modal-body {
+    padding: var(--spacing-lg);
+    overflow-y: auto;
+    max-height: calc(85vh - 140px);
+}
+
+/* === Modal Summary === */
+.modal-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: var(--color-bg);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.summary-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.summary-label {
+    font-size: 11px;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.summary-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+/* === Modal Progress === */
+.modal-progress {
+    padding: var(--spacing-md);
+    background: var(--color-bg);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.progress-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-sm);
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+}
+
+.progress-stat {
+    font-size: 13px;
+    color: var(--color-text-muted);
+}
+
+.progress-stat strong {
+    color: var(--color-text);
+}
+
+/* === Payments Grid === */
+.payments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: var(--spacing-sm);
+}
+
+.payment-month {
+    padding: var(--spacing-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition);
+    background: var(--color-surface);
+}
+
+.payment-month:hover {
+    border-color: var(--color-text-muted);
+}
+
+.payment-month.paid {
+    background: var(--color-success-bg);
+    border-color: var(--color-success);
+}
+
+.payment-month.paid .payment-check {
+    opacity: 1;
+}
+
+.payment-number {
+    font-size: 11px;
+    color: var(--color-text-muted);
+    margin-bottom: 4px;
+}
+
+.payment-date {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-text);
+    margin-bottom: 4px;
+}
+
+.payment-amount {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+.payment-check {
+    width: 18px;
+    height: 18px;
+    margin: var(--spacing-sm) auto 0;
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+}
+
+.payment-month.paid .payment-check {
+    background: var(--color-success);
+    border-color: var(--color-success);
+    color: white;
+    font-size: 10px;
+}
+
+/* === Delete Modal === */
+.modal-sm .modal-dialog {
+    max-width: 400px;
+}
+
+.modal-footer {
+    display: flex;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+    justify-content: flex-end;
+}
+
+.delete-message {
+    font-size: 14px;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-sm);
+}
+
+.delete-warning {
+    font-size: 13px;
+    color: var(--color-text-muted);
+}
+
+.btn-danger {
+    padding: 10px 16px;
+    background: var(--color-danger);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: opacity var(--transition);
+}
+
+.btn-danger:hover {
+    opacity: 0.9;
+}
+
+/* === Notification === */
+.notification {
+    position: fixed;
+    top: var(--spacing-lg);
+    right: var(--spacing-lg);
+    padding: 12px 16px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    display: none;
+    z-index: 200;
+}
+
+.notification.show {
+    display: block;
+}
+
+.notification.success {
+    border-left: 3px solid var(--color-success);
+}
+
+.notification.error {
+    border-left: 3px solid var(--color-danger);
+}
+
+.notification-message {
+    font-size: 13px;
+    color: var(--color-text);
+}
+
+/* === Responsive === */
+@media (max-width: 900px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .card-limit-section {
+        flex-wrap: wrap;
+    }
+    
+    .card-limit-bar {
+        order: 3;
+        flex-basis: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 0 var(--spacing-md);
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    .card-limit-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+    
+    .card-limit-bar {
+        width: 100%;
+    }
+    
+    .card-limit-percent {
+        text-align: left;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal-summary {
+        grid-template-columns: 1fr;
+    }
+    
+    .payments-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .loan-header {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .loan-amount {
+        text-align: left;
+    }
+}
+
+/* ===== Header Right ===== */
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.header-right {
+    display: flex;
+    gap: var(--spacing-sm);
+    align-items: center;
+}
+
+/* === Theme Toggle === */
+.theme-toggle {
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+    cursor: pointer;
+    font-size: 16px;
+    transition: all var(--transition);
+}
+
+.theme-toggle:hover {
+    background: var(--color-bg);
+    border-color: var(--color-text-muted);
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+    background: #334155;
+    border-color: #64748b;
+}
+
+/* ===== Bank Filter ===== */
+.bank-filter {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-sm) 0;
+}
+
+.filter-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+}
+
+.filter-select {
+    flex: 1;
+    padding: 8px 12px;
+}
+
+/* ===== Bank Badge ===== */
+.loan-bank-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.loan-bank-badge .bank-icon {
+    font-size: 14px;
+}
+
+.loan-bank-badge .bank-name {
+    font-weight: 500;
+}
+
+/* ===== Bank Modal ===== */
+.modal-md .modal-dialog {
+    max-width: 500px;
+}
+
+.bank-form {
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.bank-form .btn-primary {
+    margin-top: var(--spacing-md);
+}
+
+.field-color {
+    height: 40px;
+    padding: 4px 8px;
+    cursor: pointer;
+}
+
+/* ===== Banks List ===== */
+.banks-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.bank-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    transition: all var(--transition);
+}
+
+.bank-item:hover {
+    box-shadow: var(--shadow-sm);
+}
+
+.bank-item.bank-default {
+    background: var(--color-bg);
+    opacity: 0.8;
+}
+
+.bank-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    background: var(--color-bg);
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.bank-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.bank-name-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.bank-info .bank-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+.bank-count {
+    font-size: 12px;
+    color: var(--color-text-muted);
+}
+
+.bank-badge {
+    font-size: 11px;
+    padding: 2px 8px;
+    background: var(--color-success-bg);
+    color: var(--color-success);
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+}
+
+.bank-limit-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.bank-usage {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-primary);
+}
+
+.bank-remaining {
+    font-size: 12px;
+    color: var(--color-success);
+}
+
+.bank-remaining.danger {
+    color: var(--color-danger);
+}
+
+.bank-remaining.warning {
+    color: #f59e0b;
+}
+
+.bank-progress-bar {
+    height: 6px;
+    background: var(--color-border-light);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.bank-progress {
+    height: 100%;
+    background: var(--color-success);
+    border-radius: 3px;
+    transition: width 300ms ease;
+}
+
+.bank-progress.warning {
+    background: #f59e0b;
+}
+
+.bank-progress.danger {
+    background: var(--color-danger);
+}
+
+.bank-actions {
+    display: flex;
+    gap: 4px;
+}
+
+.bank-view-btn,
+.bank-delete {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.bank-view-btn {
+    color: var(--color-primary);
+    border-color: var(--color-border);
+}
+
+.bank-view-btn:hover {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+}
+
+.bank-delete {
+    font-size: 18px;
+}
+
+.bank-delete:hover {
+    background: var(--color-danger-bg);
+    color: var(--color-danger);
+    border-color: var(--color-danger);
+}

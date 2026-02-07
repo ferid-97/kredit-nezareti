@@ -511,6 +511,15 @@ function closeBankModal() {
         showNotification('Davam etmək üçün bank əlavə edin', 'error');
         return;
     }
+
+    // Əgər bank var ama seçilməyibsə, modalı bağlama
+    const match = document.cookie.match(/selectedBankId=([^;]+)/);
+    const bankId = match ? match[1] : '';
+    if (!bankId) {
+        showNotification('Zəhmət olmasa bank seçin', 'error');
+        return;
+    }
+
     bankModal.classList.remove('active');
     document.body.classList.remove('modal-open');
 }
